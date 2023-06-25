@@ -6,8 +6,13 @@ const {
   logout,
 } = require('../controllers/users');
 
-router.post('/signin', login);
-router.post('/signup', createUser);
+const {
+  validationLogin,
+  validationCreateUser,
+} = require('../middlewares/validations');
+
+router.post('/signin', validationLogin, login);
+router.post('/signup', validationCreateUser, createUser);
 router.post('/signout', logout);
 
 module.exports = router;
