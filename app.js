@@ -6,6 +6,7 @@ const { errors } = require('celebrate');
 require('dotenv').config();
 
 const { PORT, limiter } = require('./utils/config');
+const handelError = require('./error/HandleError');
 
 const app = express();
 mongoose.connect('mongodb://127.0.0.1/bitfilmsdb');
@@ -18,5 +19,9 @@ app.use(helmet({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/', require('./routes/index'));
+
 app.use(errors());
+app.use(handelError);
+
 app.listen(PORT);
