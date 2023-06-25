@@ -5,12 +5,12 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 require('dotenv').config();
 
-const { PORT, limiter } = require('./utils/config');
+const { PORT, limiter, dbConnection } = require('./utils/config');
 const handelError = require('./error/HandleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
-mongoose.connect('mongodb://127.0.0.1/bitfilmsdb');
+mongoose.connect(dbConnection);
 
 app.use(cookieParser());
 app.use(limiter);
