@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint .",
+    "eslint": "npx eslint .",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -27,6 +27,7 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1",
+    "validator": "^13.9.0",
     "winston": "^3.9.0"
   }
 }
