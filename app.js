@@ -5,11 +5,14 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 require('dotenv').config();
 
-const { PORT, limiter, dbConnection } = require('./utils/config');
+const { limiter, dbConnection } = require('./utils/config');
 const handelError = require('./error/HandleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const { PORT, NODE_ENV, DATABASE_URL } = process.env;
+
 const app = express();
+mongoose.connect(NODE_ENV === 'production' ? DATABASE_URL : dbConnection);
 mongoose.connect(dbConnection);
 
 app.use(cookieParser());

@@ -1,5 +1,10 @@
 const { celebrate, Joi } = require('celebrate');
-const { regexUrl, regexId, russianRegex, englishRegex } = require('../utils/regex');
+const {
+  regexUrl,
+  regexId,
+  russianRegex,
+  englishRegex,
+} = require('../utils/regex');
 
 module.exports.validationUpdateUserInfo = celebrate({
   body: Joi.object().keys({
@@ -36,5 +41,11 @@ module.exports.validationCreateMovie = celebrate({
     nameEN: Joi.string().required().regex(englishRegex),
     thumbnail: Joi.string().required().regex(regexUrl),
     movieId: Joi.number().required().regex(regexId),
+  }),
+});
+
+module.exports.validationMovieId = celebrate({
+  params: Joi.object().keys({
+    movieId: Joi.string().required().regex(regexId),
   }),
 });
