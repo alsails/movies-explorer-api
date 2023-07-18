@@ -40,7 +40,7 @@ module.exports.validationCreateMovie = celebrate({
     nameRU: Joi.string().required().regex(russianRegex),
     nameEN: Joi.string().required().regex(englishRegex),
     thumbnail: Joi.string().required().regex(regexUrl),
-    movieId: Joi.number().required().regex(regexId),
+    movieId: Joi.string().required().regex(regexId),
   }),
 });
 
