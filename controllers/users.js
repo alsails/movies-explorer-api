@@ -20,7 +20,7 @@ function findUserById(id) {
 
 module.exports.getUser = (req, res, next) => {
   findUserById(req.user._id)
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -36,9 +36,7 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => {
       const userInfo = user.toObject();
       delete userInfo.password;
-      res.send({
-        data: userInfo,
-      });
+      res.send(userInfo);
     })
     .catch((err) => {
       if (err.code === 11000) {
@@ -68,7 +66,7 @@ module.exports.updateInfo = (req, res, next) => {
     .orFail(() => {
       throw new NotFound('Пользователь с указанным _id не найден');
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.code === 11000) {
         next(new Conflict('Введеный email уже зарегистрирован'));
@@ -96,9 +94,7 @@ module.exports.login = (req, res, next) => {
       });
       const userInfo = user.toObject();
       delete userInfo.password;
-      res.send({
-        data: userInfo,
-      });
+      res.send(req.cookies);
     })
     .catch(next);
 };

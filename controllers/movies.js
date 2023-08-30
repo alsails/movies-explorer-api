@@ -13,7 +13,7 @@ module.exports.getMovies = (req, res, next) => {
   Movie.find({ owner })
     .populate(['owner'])
     .then((movie) => {
-      res.send({ data: movie });
+      res.send(movie);
     })
     .catch(next);
 };
@@ -40,7 +40,7 @@ module.exports.createMovie = (req, res, next) => {
   })
     .then((movie) => {
       movie.populate(['owner'])
-        .then(() => res.send({ data: movie }));
+        .then(() => res.send(movie));
     })
     .catch((err) => {
       if (err.name instanceof ValidationError) {

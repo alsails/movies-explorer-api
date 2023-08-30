@@ -2,14 +2,15 @@ const { celebrate, Joi } = require('celebrate');
 const {
   regexUrl,
   regexId,
-  russianRegex,
-  englishRegex,
+  regexEmail,
+  // russianRegex,
+  // englishRegex,
 } = require('../utils/regex');
 
 module.exports.validationUpdateUserInfo = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    email: Joi.string().email().required(),
+    email: Joi.string().required().regex(regexEmail),
   }),
 });
 
@@ -23,7 +24,7 @@ module.exports.validationLogin = celebrate({
 module.exports.validationCreateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    email: Joi.string().email().required(),
+    email: Joi.string().required().regex(regexEmail),
     password: Joi.string().required(),
   }),
 });
@@ -37,10 +38,10 @@ module.exports.validationCreateMovie = celebrate({
     description: Joi.string().required(),
     image: Joi.string().required().regex(regexUrl),
     trailerLink: Joi.string().required().regex(regexUrl),
-    nameRU: Joi.string().required().regex(russianRegex),
-    nameEN: Joi.string().required().regex(englishRegex),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
     thumbnail: Joi.string().required().regex(regexUrl),
-    movieId: Joi.string().required().regex(regexId),
+    movieId: Joi.number().required(),
   }),
 });
 
