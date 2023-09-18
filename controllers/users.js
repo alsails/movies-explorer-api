@@ -91,6 +91,8 @@ module.exports.login = (req, res, next) => {
       res.cookie('jwt', token, {
         expires: new Date(Date.now() + 24 * 60 * 60 * 1000 * 7),
         httpOnly: true,
+        sameSite: 'none',
+        secure: true,
       });
       const userInfo = user.toObject();
       delete userInfo.password;
